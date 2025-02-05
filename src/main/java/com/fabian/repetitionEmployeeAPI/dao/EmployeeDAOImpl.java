@@ -6,12 +6,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.fabian.repetitionEmployeeAPI.component.Employee;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import org.springframework.transaction.annotation.Transactional;
+
+import com.fabian.repetitionEmployeeAPI.entity.Employee;
 
 @Repository
 public class EmployeeDAOImpl implements EmployeeDAO {

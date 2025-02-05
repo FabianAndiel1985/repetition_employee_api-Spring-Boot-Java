@@ -2,7 +2,7 @@ package com.fabian.repetitionEmployeeAPI.service;
 
 import java.util.List;
 
-import com.fabian.repetitionEmployeeAPI.component.Employee;
+import com.fabian.repetitionEmployeeAPI.entity.Employee;
 
 public interface EmployeeService {
 

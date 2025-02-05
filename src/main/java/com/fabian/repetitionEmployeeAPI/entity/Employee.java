@@ -1,4 +1,4 @@
-package com.fabian.repetitionEmployeeAPI.component;
+package com.fabian.repetitionEmployeeAPI.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

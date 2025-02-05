@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fabian.repetitionEmployeeAPI.component.Employee;
 import com.fabian.repetitionEmployeeAPI.dao.DatabaseException;
 import com.fabian.repetitionEmployeeAPI.dao.EmployeeDAO;
+import com.fabian.repetitionEmployeeAPI.entity.Employee;
 import com.fabian.repetitionEmployeeAPI.service.EmployeeService;
 
 @RestController
