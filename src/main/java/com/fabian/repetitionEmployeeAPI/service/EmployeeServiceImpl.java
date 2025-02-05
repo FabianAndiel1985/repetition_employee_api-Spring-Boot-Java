@@ -23,6 +23,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee saveEmployee(Employee empl) {
 		return employeeDao.saveEmployee(empl);
 	}
+	
+	@Override
+	public Employee updateEmployee(Employee empl) {
+		if(empl.getId() == 0) {
+			throw new UpdateIdMissingException("The id of the employee to be updated is needed");
+		}
+		else {
+		return employeeDao.saveEmployee(empl);
+		}
+	}
 
 	@Override
 	public List<Employee> getAllEmployees() {
@@ -38,9 +48,5 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public String deleteEmployeeById(int id) {
 		return employeeDao.deleteEmployeeById(id);
 	}
-	
-	
-	
-	
 
 }

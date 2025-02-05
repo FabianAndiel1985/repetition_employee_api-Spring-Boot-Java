@@ -17,6 +17,9 @@ import com.fabian.repetitionEmployeeAPI.dao.DatabaseException;
 import com.fabian.repetitionEmployeeAPI.dao.EmployeeDAO;
 import com.fabian.repetitionEmployeeAPI.entity.Employee;
 import com.fabian.repetitionEmployeeAPI.service.EmployeeService;
+import com.fabian.repetitionEmployeeAPI.service.UpdateIdMissingException;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api")
@@ -47,7 +50,7 @@ public class EmployeeController {
 	
 	
 	@PostMapping("/employees")
-		public String postEmployee(@RequestBody Employee employee) {
+		public String postEmployee(@Valid @RequestBody Employee employee) {
 			employee.setId(0);
 			employeeService.saveEmployee(employee);
 			return employee.toString();
@@ -64,10 +67,14 @@ public class EmployeeController {
 	
 	
 	@PutMapping("/employees")
-	public String updateEmployee(@RequestBody Employee employee) {
-		//wenn id null ist oder 0 nicht weiterlassen
-			employeeService.saveEmployee(employee);
+	public String updateEmployee(@Valid @RequestBody  Employee employee) {
+		if(employee.getId() == 0) {
+			System.out.println("GOES HERE ");
+			throw new UpdateIdMissingException("The id of the employee to be updated is needed");
+		}
+		employeeService.saveEmployee(employee);
 		return "Employee updated";
+	
 	}
 
 }

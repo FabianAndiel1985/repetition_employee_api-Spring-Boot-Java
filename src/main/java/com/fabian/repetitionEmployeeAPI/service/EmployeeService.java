@@ -7,7 +7,9 @@ import com.fabian.repetitionEmployeeAPI.entity.Employee;
 public interface EmployeeService {
 
 	public Employee saveEmployee(Employee empl);
+	public Employee updateEmployee(Employee empl);
 	public List<Employee> getAllEmployees();
 	public Employee getEmployeeById(int id);
 	public String deleteEmployeeById(int id);
+	
 }
