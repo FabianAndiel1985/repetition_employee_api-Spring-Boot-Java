@@ -14,84 +14,59 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fabian.repetitionEmployeeAPI.component.Employee;
+import com.fabian.repetitionEmployeeAPI.dao.DatabaseException;
 import com.fabian.repetitionEmployeeAPI.dao.EmployeeDAO;
+import com.fabian.repetitionEmployeeAPI.service.EmployeeService;
 
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
 	
 	private EmployeeDAO employeeDao;
+	private EmployeeService employeeService;
 
 	@Autowired
-	public EmployeeController(EmployeeDAO employeeDao) {
-		this.employeeDao = employeeDao;
+	public EmployeeController(EmployeeService employeeService) {
+		this.employeeService = employeeService;
 	}
 
 	@GetMapping("/employees")
 	public List<Employee> getAllEmployees() {
 		List<Employee> employees = null;
-		try {
-			employees = employeeDao.getAllEmployees();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+		employees = employeeService.getAllEmployees();
 		return employees;
 	}
+
 	
 	@GetMapping("/employees/{id}")
-	public String getEmployeeById(@PathVariable("id") int id ) {
-	
+	public Employee getEmployeeById(@PathVariable("id") int id ) {
 		Employee employee = null;
-		try {
-		employee = employeeDao.getEmployeeById(id);
-		}
-		catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-			return null;
-		}
-		return employee.toString();
+		employee = employeeService.getEmployeeById(id);
+		return employee;
 	}
 	
 	
 	@PostMapping("/employees")
 		public String postEmployee(@RequestBody Employee employee) {
 			employee.setId(0);
-			try {
-				employeeDao.saveEmployee(employee);
-			} catch (Exception e) {
-				System.out.println(e.getMessage());
-				e.printStackTrace();
-				return null;
-			}
+			employeeService.saveEmployee(employee);
 			return employee.toString();
 		}
 	
 	
 	@DeleteMapping("/employees/{id}")
 	public String deleteEmployee(@PathVariable("id") int id )  {
-		try {
-			employeeDao.deleteEmployeeById(id);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			e.printStackTrace();
-			return null;
-		}
-		return "Employee with id successfully deleted " + id;
+		String message = "";
+		message = employeeService.deleteEmployeeById(id);
+		return message;
 	}
 	
 	
 	
 	@PutMapping("/employees")
 	public String updateEmployee(@RequestBody Employee employee) {
-		try {
-			employeeDao.saveEmployee(employee);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		//wenn id null ist oder 0 nicht weiterlassen
+			employeeService.saveEmployee(employee);
 		return "Employee updated";
 	}
 
