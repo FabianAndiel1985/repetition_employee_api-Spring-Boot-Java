@@ -68,10 +68,6 @@ public class EmployeeController {
 	
 	@PutMapping("/employees")
 	public String updateEmployee(@Valid @RequestBody  Employee employee) {
-		if(employee.getId() == 0) {
-			System.out.println("GOES HERE ");
-			throw new UpdateIdMissingException("The id of the employee to be updated is needed");
-		}
 		employeeService.saveEmployee(employee);
 		return "Employee updated";
 	
